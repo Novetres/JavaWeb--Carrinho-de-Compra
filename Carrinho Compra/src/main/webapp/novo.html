@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" type="text/css"
+	href="bootstrap/css/bootstrap.min.css">
+<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="bootstrap/js/jquery-3.6.0.min.js"></script>
+
+<title>Novo item</title>
+<link rel="icon" href="img/favicon.png">
+</head>
+<body class="bg-dark ">
+	<br>
+	<div class="bg-warning">
+	<h1 class="text-center text-danger">Novo Item</h1>
+	</div>
+	<br>
+	<br>
+	
+	<form name="frmContato" action="insert">
+
+		<div class="col-md-4 text-center">
+
+			<input type="text" class="form-control" name="item"
+				placeholder="Item">
+		</div>
+
+		<div class="col-4">
+
+			<input type="text" class="form-control mt-3" name="quantidade" onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+				placeholder="Quantidade">
+		</div>
+
+		<div class="col-4">
+		
+
+			<input type="text" class="form-control mt-3" onkeypress="return event.charCode >= 48 && event.charCode <= 57" type="text"  name="preco"
+				placeholder="Preço">
+		</div>
+
+
+		<div class="d-grid gap-2 col-6 mx-auto mt-3">
+		
+	
+		<a   type="button" class="btn btn-danger text-warning rounded-bottom" onclick="validar()"> ADICIONAR </a>
+
+		</div>
+
+	</form>
+
+	<script src="scripts/valida.js"></script>
+</body>
+</html>
