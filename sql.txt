@@ -1,0 +1,55 @@
+/**
+* Projeto 5: Carrinho de compra
+* @author Paloma Kimberly
+*/
+
+create database dbmycar;
+
+update tbcar set quantidade=5 where codigo=1;
+use dbmycar;
+
+create table tbcar (
+	codigo int primary key auto_increment,
+    item varchar(100) not null,
+    quantidade int not null,
+    preco decimal(10,2)
+);
+
+describe tbcar;
+
+drop table tbcar;
+select * from tbcar;
+
+insert into tbcar(item,quantidade,preco)
+values ('Jeitosinho 400 ml - Polpa de fruta','2',39.90);
+
+insert into tbcar(item,quantidade,preco)
+values ('Sal 1,3 kg','3',41.90);
+
+insert into tbcar(item,quantidade,preco)
+values ('Tupper Potinho Floral 140 ml - Canela','3',22.90);
+
+insert into tbcar(item,quantidade,preco)
+values ('Eco Tupper Plus Kiwi 310 ml','4',36.90);
+
+insert into tbcar(item,quantidade,preco)
+values ('Eco Tupper Plus 500 ml','2',34.90);
+
+insert into tbcar(item,quantidade,preco)
+values ('Copinho com bico Tupper Baby 200 ml','1',37.90);
+
+select * from tbcar order by item;	
+select * from tbcar;
+
+
+delete from tbcar where codigo='15';
+
+
+select sum(quantidade * preco)  as Total from tbcar;
+
+SELECT total FROM tbcar;
+
+select sum(quantidade * preco) from tbcar;
+select sum(quantidade) from tbcar;
+
+select * FROM tbcar;
