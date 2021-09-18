@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class DAO {
@@ -57,7 +58,7 @@ public class DAO {
 			PreparedStatement pst = con.prepareStatement(create);
 			pst.setString(1, javabeans.getItem());
 			pst.setString(2, javabeans.getQuantidade());
-			pst.setString(3, javabeans.getPreco().replace(",", "."));
+			pst.setString(3, javabeans.getPreco());
 
 			pst.executeUpdate();
 			con.close();
@@ -117,12 +118,6 @@ public void alterarItem(JavaBeans item) {
 	}
 }
 
-
-
-
-
-
-
 	public void selecionarItem(JavaBeans item) {
 		String read2 = "select * from tbcar where codigo=?";
 		try {
@@ -144,41 +139,43 @@ public void alterarItem(JavaBeans item) {
 		}
 	}
 
-
-	
-
-		public void deletarItem(JavaBeans item)  {
-			String delete = "delete from tbcar where codigo=?";
+	public void deletarItem(JavaBeans item) {
+		String delete = "delete from tbcar where codigo=?";
+		try {
+			Connection con = conectar();
+			PreparedStatement pst = con.prepareStatement(delete);
+			pst.setString(1, item.getCodigo());
 			
-				try {
-					Connection con = conectar();
-					PreparedStatement pst = con.prepareStatement(delete);
-					pst.setString(1, item.getCodigo());
-					
-					pst.executeUpdate();
-					
-					con.close();
-				} catch (Exception e) {
-					System.out.println(e);
-				}
-		}}
-//		public void  somando(JavaBeans item) {
-//			String somar = "select * FROM tbcar" ;
-//			try {
-//				Connection con = conectar();
-//				PreparedStatement pst = con.prepareStatement(somar);
-//				ResultSet rs = pst.executeQuery(); // Passo 3 - slide 22
-//				while (rs.next()) {
-//
-//					item.setQuantidade(rs.getString(3));
-//					item.setPreco(rs.getString(4));
-//					
-//				}
-//				con.close();
-//			
-//			} catch (Exception e) {
-//				System.out.println(e);
-//			
-//				}}		
-//}
+			con.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+	
+	
 		
+		public void somarItem(JavaBeans javabeans)  {
+			String somar = "select sum(quantidade * preco) from tbcar";
+		
+			 try {
+					Connection con = conectar();
+				 PreparedStatement pst = con.prepareStatement(somar);
+						ResultSet rs = pst.executeQuery();
+			           
+				 while (rs.next()) {
+				 
+				
+				 javabeans.setProduto(rs.getString(1));
+			
+				
+				
+			
+				 }	con.close();
+			} 
+			 catch (Exception e) {
+				System.out.println(e);
+				
+				
+			}}}
+//				 

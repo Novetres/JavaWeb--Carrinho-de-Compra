@@ -5,6 +5,8 @@ private String codigo;
 private String item;
 private String quantidade;
 private String preco;
+private String produto;
+
 public String getCodigo() {
 	return codigo;
 }
@@ -29,6 +31,14 @@ public String getPreco() {
 public void setPreco(String preco) {
 	this.preco = preco;
 }
+
+public String getProduto() {
+	return produto;
+}
+public void setProduto(String produto) {
+	this.produto = produto;
+}
+
 
 public JavaBeans() {
 	super();

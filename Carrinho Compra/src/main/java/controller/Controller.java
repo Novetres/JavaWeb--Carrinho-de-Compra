@@ -21,7 +21,7 @@ import model.JavaBeans;
 
 // Recebimento de requisicoes
 
-@WebServlet(urlPatterns = { "/Controller", "/main", "/insert", "/select", "/update", "/delete", "/report"})
+@WebServlet(urlPatterns = { "/Controller", "/main", "/insert", "/select", "/update", "/delete", "/report",})
 public class Controller extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -42,6 +42,7 @@ public class Controller extends HttpServlet {
 			throws ServletException, IOException {
 		// teste de conexao com o banco de dados
 		dao.testarConexao();
+		
 		// Encaminhamento das requisicoes
 		String action = request.getServletPath(); // armazena a requisicao atual
 		System.out.println("Requisição: " + action);
@@ -57,7 +58,7 @@ public class Controller extends HttpServlet {
 			 excluirItem(request, response);
 		}else if (action.equals("/report")) {
 			 gerarRelatorio(request, response);
-
+		
 		
 		}
 	}
@@ -70,7 +71,7 @@ public class Controller extends HttpServlet {
 ////			
 //			System.out.println(request.getParameter("item"));
 //			System.out.println(request.getParameter("quantidade"));
-//		System.out.println(request.getParameter("preco"));
+//		
 
 		// Receber os dados do formulario e armazenar temporarimente nas variaveis
 		// javabeans
@@ -80,7 +81,7 @@ public class Controller extends HttpServlet {
 
 		// executar o metodo inserirContato (DAO) passando javabeans
 		dao.inserirItem(javabeans);
-
+		
 		response.sendRedirect("main");
 
 	}
@@ -89,6 +90,12 @@ public class Controller extends HttpServlet {
 	protected void item(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<JavaBeans> lista = dao.listarItem();
 		request.setAttribute("itens", lista);
+		
+		dao.somarItem(javabeans);
+		String total = javabeans.getProduto();
+		//System.out.println(total);
+		request.setAttribute("total", total);
+			
 		RequestDispatcher rd = request.getRequestDispatcher("carrinho.jsp");
 		rd.forward(request, response);
 //	
@@ -117,6 +124,8 @@ public class Controller extends HttpServlet {
 		request.setAttribute("preco", javabeans.getPreco());
 //		
 //		
+		
+		
 		RequestDispatcher rd = request.getRequestDispatcher("editar.jsp");
 		rd.forward(request, response);
 
@@ -135,13 +144,12 @@ public class Controller extends HttpServlet {
 
 	protected void excluirItem(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-	String codigo = request.getParameter("codigo");
-//	System.out.println(codigo);
-   	javabeans.setCodigo(codigo);
-//	
-//
- 	dao.deletarItem(javabeans);
-	response.sendRedirect("main");
+		String codigo = request.getParameter("codigo");
+		javabeans.setCodigo(codigo);
+		dao.deletarItem(javabeans);
+		response.sendRedirect("main");
+				
+		
 }
 	protected void gerarRelatorio(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -185,5 +193,25 @@ public class Controller extends HttpServlet {
 		documento.close();
 	}
 	}
+	
+	
+	protected void somarItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//	  double total =  dao.testar(javabeans);
+//	  request.setAttribute("itens", total);
+		 ArrayList<JavaBeans> lista = dao.listarItem();
+		 for (int i = 0; i < lista.size(); i++) {
+			 
+			
+			 
+		 }
+		
+		
+		//System.out.println();
+		
+		//request.setAttribute("resultado", vezes);
+		}
+//		request.setAttribute("itens", lista);
+//		RequestDispatcher rd = request.getRequestDispatcher("carrinho.jsp");
+//		rd.forward(request, response);
 	 
 }

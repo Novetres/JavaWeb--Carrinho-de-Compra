@@ -37,7 +37,7 @@
       <th scope="col" class="text-center">Codigo</th>
       <th scope="col"  class="text-center">Item</th>
       <th  scope="col"  class="text-center">Quantidade</th>
-      <th  scope="col" class="text-center">Preço</th>
+      <th  scope="col" class="text-center">Preço</th>  
       <th scope="col" class="text-center">Opções</th>
     
     </tr>
@@ -58,11 +58,15 @@ for (int i=0; i<lista.size();i++){
   <td><%=lista.get(i).getCodigo()%></td>  
 <td><%=lista.get(i).getItem()%></td>
 
-<td><%=lista.get(i).getQuantidade()%></td>
+<td class="quantidade"><%=lista.get(i).getQuantidade()%></td>
 <td ><%=lista.get(i).getPreco()%></td>
+
   <td><a  href="select?codigo=<%=lista.get(i).getCodigo()%>" class="btn btn-dark text-danger text-center"> Editar</a> 
-  <a href="javascript: confirmar(<%=lista.get(i).getCodigo()%>)" type="button" class="btn btn-dark text-danger  text-center" > Excluir</a></td>
+ <a  href="javascript: confirmar(<%=lista.get(i).getCodigo()%>)" class="btn btn-dark text-danger text-center"> Excluir</a> 
+ 
+ </td>
   
+ 
    
     </tr>
     
@@ -71,16 +75,28 @@ for (int i=0; i<lista.size();i++){
 }
 %>
 
+
+
+
  </tbody>
 
  </table>
  
+ <script src="scripts/confirmador.js"></script>
  
+ 			<div class="row mb-2">
+  <label for="colFormLabelSm" class="rounded col-sm-2 col-form-label col-form-label-sm text-warning text-center bg-danger">VALOR TOTAL</label>
+  <div class="col-sm-1">
+    <input type="text" class="form-control form-control-sm bg-dark text-white" id="colFormLabelSm " readonly    value="<%out.println(request.getAttribute("total"));%>">
+  </div>
+</div>
+
+
+		
+		
+
  
- 
- 
- 
-  <script src="scripts/confirmador.js"></script>
+  
   </body>
   </html>
   
